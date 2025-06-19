@@ -18,7 +18,7 @@ const Newsletter = () => {
     setLoading(true);
     try {
       const res = await axios.post(
-        "http://localhost:8000/api/v1/newsletter/subscribe",
+        "https://blog-site-6od5.onrender.com/api/v1/newsletter/subscribe",
         { email },
         {
           headers: {

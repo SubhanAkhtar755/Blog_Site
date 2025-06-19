@@ -30,7 +30,7 @@ const RecentBlog = () => {
   useEffect(() => {
     const getAllPublsihedBlogs = async () => {
       try {
-        const res = await axios.get(`http://localhost:8000/api/v1/blog/get-published-blogs`, {
+        const res = await axios.get(`https://blog-site-6od5.onrender.com/api/v1/blog/get-published-blogs`, {
           withCredentials: true
         });
         if (res.data.success) {
@@ -50,7 +50,7 @@ const RecentBlog = () => {
 
     setLoading(true);
     try {
-      const res = await axios.post("http://localhost:8000/api/v1/newsletter/subscribe", { email });
+      const res = await axios.post("https://blog-site-6od5.onrender.com/api/v1/newsletter/subscribe", { email });
       toast.success(res.data.message || "Subscribed successfully!");
       setEmail("");
     } catch (err) {

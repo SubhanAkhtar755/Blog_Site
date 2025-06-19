@@ -36,7 +36,7 @@ const CreateBlog = () => {
     try {
       setLoading(true);
       const res = await axios.post(
-        `http://localhost:8000/api/v1/blog/`,
+        `https://blog-site-6od5.onrender.com/api/v1/blog/`,
         {
           title,
           category: category.value,
