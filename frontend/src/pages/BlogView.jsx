@@ -36,7 +36,7 @@ const BlogView = () => {
     const likeOrDislikeHandler = async () => {
         try {
             const action = liked ? 'dislike' : 'like';
-            const res = await axios.get(`https://blog-site-6od5.onrender.com/api/v1/blog/${selectedBlog?._id}/${action}`, { withCredentials: true })
+            const res = await axios.get(`http://localhost:8000/api/v1/blog/${selectedBlog?._id}/${action}`, { withCredentials: true })
             if (res.data.success) {
                 const updatedLikes = liked ? blogLike - 1 : blogLike + 1;
                 setBlogLike(updatedLikes);
@@ -66,14 +66,6 @@ const BlogView = () => {
         return formattedDate
     }
 
-    // const handleShare = (blogId) => {
-    //     const blogUrl = `${window.location.origin}/blogs/${blogId}`;
-    //     navigator.clipboard.writeText(blogUrl).then(() => {
-    //         toast.success('Blog link copied to clipboard!');
-    //     }).catch((err) => {
-    //         console.error('Failed to copy:', err);
-    //     });
-    // };
     const handleShare = (blogId) => {
         const blogUrl = `${window.location.origin}/blogs/${blogId}`;
       
@@ -187,25 +179,7 @@ const BlogView = () => {
                 </div>
                 <CommentBox selectedBlog={selectedBlog} />
 
-                {/* Author Bio */}
-                {/* <Card className="mb-12">
-                    <CardContent className="flex items-start space-x-4 pt-6">
-                        <Avatar className="h-12 w-12">
-                            <AvatarImage src="/placeholder.svg?height=48&width=48" alt="Author" />
-                            <AvatarFallback>JD</AvatarFallback>
-                        </Avatar>
-                        <div>
-                            <h3 className="font-semibold mb-1">About Jane Doe</h3>
-                            <p className="text-sm text-muted-foreground mb-3">
-                                Jane is a lead developer with over 10 years of experience in web development. She specializes in React and
-                                Next.js and has helped numerous companies build modern, performant websites.
-                            </p>
-                            <Button variant="outline" size="sm">
-                                Follow
-                            </Button>
-                        </div>
-                    </CardContent>
-                </Card> */}
+              
             </div>
         </div>
     )

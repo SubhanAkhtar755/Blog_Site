@@ -69,3 +69,39 @@
   background-color: #000000;
   color: rgba(26, 25, 25, 0.806);
 }
+
+
+.scrollbar-hidden {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+.scrollbar-on-hover:hover {
+  scrollbar-width: thin;
+}
+
+.scrollbar-on-hover:hover::-webkit-scrollbar {
+  display: block;
+  width: 6px;
+}
+.scroll-on-hover {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.scroll-on-hover::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-on-hover:hover {
+  scrollbar-width: thin;
+}
+
+.scroll-on-hover:hover::-webkit-scrollbar {
+  display: block;
+  width: 6px;
+}

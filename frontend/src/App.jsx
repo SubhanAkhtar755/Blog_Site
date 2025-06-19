@@ -16,6 +16,7 @@ import Comments from './pages/Comments'
 import UpdateBlog from './pages/UpdateBlog'
 import ProtectedRoute from './components/ProtectedRoute'
 import SearchList from './pages/SearchList'
+import GenerateLink from './pages/GenerateLink'
 
 const router = createBrowserRouter([
   {
@@ -36,7 +37,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/blogs/:blogId",
-    element: <><Navbar/><ProtectedRoute><BlogView /></ProtectedRoute></>
+    element: <><Navbar/><BlogView /></>
   },
   {
     path: "/write-blog",
@@ -47,14 +48,7 @@ const router = createBrowserRouter([
     path: "/profile",
     element: <><Navbar/><Profile /></>
   },
-  // {
-  //   path: "write-blog/:blogId",
-  //       element: <><Navbar/><CreateBlog /></>
-  // },
-  // {
-  //   path: "/dashboard",
-  //   element: <><Navbar/><Dashboard /></>
-  // },
+ 
   {
     path:"/dashboard",
     element: <><Navbar/><ProtectedRoute><Dashboard/></ProtectedRoute></>,
@@ -75,11 +69,14 @@ const router = createBrowserRouter([
         path: "comments",
         element:<Comments/>
       },
+       {
+        path: "generate-link",
+        element:<GenerateLink/>
+      },
       {
         path: "profile",
         element:<Profile/>
-      },
-      
+      }
       
     ]
    },

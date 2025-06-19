@@ -13,7 +13,7 @@ const TotalProperty = () => {
 
     const getOwnBlog = async () => {
         try {
-            const res = await axios.get(`https://blog-site-6od5.onrender.com/api/v1/blog/get-own-blogs`, { withCredentials: true })
+            const res = await axios.get(`http://localhost:8000/api/v1/blog/get-own-blogs`, { withCredentials: true })
             if (res.data.success) {
                 dispatch(setBlog(res.data.blogs))
             }
@@ -24,7 +24,7 @@ const TotalProperty = () => {
     }
     const getTotalComments = async()=>{
         try {
-          const res = await axios.get(`https://blog-site-6od5.onrender.com/api/v1/comment/my-blogs/comments`,{withCredentials:true})
+          const res = await axios.get(`http://localhost:8000/api/v1/comment/my-blogs/comments`,{withCredentials:true})
           if(res.data.success){
              setTotalComments(res.data.totalComments)
           }
@@ -36,7 +36,7 @@ const TotalProperty = () => {
 
     const getTotalLikes = async()=>{
       try {
-        const res = await axios.get(`https://blog-site-6od5.onrender.com/api/v1/blog/my-blogs/likes`,{withCredentials:true})
+        const res = await axios.get(`http://localhost:8000/api/v1/blog/my-blogs/likes`,{withCredentials:true})
         if(res.data.success){
            setTotalLikes(res.data.totalLikes)
         }
@@ -82,8 +82,8 @@ const TotalProperty = () => {
         },
       ]
   return (
-    <div className='md:p-10 p-4'>
-       <div className='flex flex-col md:flex-row justify-around gap-3 md:gap-7'>
+    <div className='md:p-10 p-4 '>
+       <div className='flex flex-col  md:flex-row justify-around gap-3 md:gap-7'>
        
       {stats.map((stat) => (
         <Card key={stat.title} className="w-full dark:bg-gray-800">
