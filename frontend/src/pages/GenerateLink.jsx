@@ -74,7 +74,7 @@ const GenerateLink = () => {
   };
 
   return (
-    <div className="pt-20 md:ml-[320px] px-4 pb-16">
+    <div className="pt-20  h-screen md:ml-[320px] px-4 pb-16">
       <div className="max-w-6xl mx-auto mt-6 space-y-10">
 
         {/* Upload Section */}
@@ -130,7 +130,7 @@ const GenerateLink = () => {
         </Card>
 
         {/* My Links Section */}
-        <Card className="p-6 md:p-10 dark:bg-gray-800 mx-4 md:mx-0">
+        <Card className="p-6 md:p-10  dark:bg-gray-800 mx-4 md:mx-0">
           <Title level={4} className="text-gray-700  dark:text-white mb-4">
             My Uploaded Links
           </Title>
