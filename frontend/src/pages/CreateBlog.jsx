@@ -87,7 +87,7 @@ const CreateBlog = () => {
 
           <div className="mt-4 mb-5">
             <Label>Category</Label>
-            <div className="mt-1">
+            <div className="mt-1 dark:text-black">
               <CreatableSelect
                 isClearable
                 options={categoryOptions}

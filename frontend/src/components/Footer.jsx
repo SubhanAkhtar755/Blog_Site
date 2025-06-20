@@ -4,6 +4,7 @@ import Logo from '../assets/logo.png';
 import { FaFacebook, FaInstagram, FaPinterest, FaTwitterSquare } from 'react-icons/fa';
 import axios from 'axios';
 import { toast } from 'sonner';
+import { FaWhatsapp } from 'react-icons/fa6';
 
 const Footer = () => {
   const [email, setEmail] = useState('');
@@ -32,12 +33,12 @@ const Footer = () => {
         <div className='mb-6 md:mb-0'>
           <Link to='/' className='flex gap-3 items-center'>
             <img src={Logo} alt="" className='invert w-12 h-12' />
-            <h1 className='text-3xl font-bold'>Logo</h1>
+            <h1 className='text-3xl font-bold' title='Represents a complete space for all kinds of blogs.'>BlogSphere</h1>
           </Link>
           <p className='mt-2'>Sharing insights, tutorials, and ideas on web development and tech.</p>
-          <p className='mt-2 text-sm'>123 Blog St, Style City, NY 10001</p>
-          <p className='text-sm'>Email: support@blog.com</p>
-          <p className='text-sm'>Phone: (123) 456-7890</p>
+          <p className='mt-2 text-sm'>Steet No. 5, City Chowk, Hasilpur 63000, Punjab, Pakistan</p>
+          <p className='text-sm'>Email:muhammadsubhan192128@gmail.com</p>
+          <p className='text-sm'>Phone: +92(311)698-6045</p>
         </div>
 
         {/* quick links */}
@@ -55,10 +56,10 @@ const Footer = () => {
         <div className='mb-6 md:mb-0'>
           <h3 className='text-xl font-semibold'>Follow Us</h3>
           <div className='flex space-x-4 mt-2'>
-            <FaFacebook />
-            <FaInstagram />
-            <FaTwitterSquare />
-         
+           <a href="https://www.facebook.com/ch.subhan.92775838/"  target="_blank"> <FaFacebook /></a>
+      <a href="https://www.instagram.com/frontend__developer_7?igsh=MTl1cThpZWt6cTZlMA=="  target="_blank">      <FaInstagram /></a>
+           <a href="https://wa.me/+923116986045" target="_blank"> <FaWhatsapp /></a>
+
           </div>
         </div>
 
@@ -66,13 +67,13 @@ const Footer = () => {
         <div>
           <h3 className='text-xl font-semibold'>Stay in the Loop</h3>
           <p className='mt-2 text-sm'>Subscribe to get special offers, free giveaways, and more</p>
-          <form onSubmit={handleSubscribe} className='mt-4 flex'>
+          <form onSubmit={handleSubscribe} className='mt-4 flex border border-white rounded-md overflow-hidden'>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder='Your email address'
-              className='w-full p-2 rounded-l-md text-black bg-white focus:outline-none dark:bg-gray focus:ring-2 focus:ring-gray-500'
+               className="flex h-10 w-full border-white rounded-md border dark:text-white bg-gray-200 -mr-1 dark:bg-gray-800 px-3 py-2 text-sm text-black"
             />
             <button
               type='submit'

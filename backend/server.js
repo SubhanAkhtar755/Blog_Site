@@ -5,6 +5,7 @@ import userRoute from "./routes/user.route.js"
 import blogRoute from "./routes/blog.route.js"
 import commentRoute from "./routes/comment.route.js"
 import newsletterRoutes from "./routes/newsletter.route.js";
+import linksRoute from "./routes/link.route.js";
 import cookieParser from 'cookie-parser';
 import cors from 'cors'
 import path from "path"
@@ -31,6 +32,7 @@ const _dirname = path.resolve()
  app.use("/api/v1/blog", blogRoute)
  app.use("/api/v1/comment", commentRoute)
  app.use("/api/v1/newsletter", newsletterRoutes);
+ app.use("/api/v1/links", linksRoute);
 
  app.use(express.static(path.join(_dirname,"/frontend/dist")));
  app.get("*", (_, res)=>{

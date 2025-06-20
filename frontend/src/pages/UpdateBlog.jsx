@@ -149,7 +149,7 @@ const UpdateBlog = () => {
                     </div>
                     <div>
                         <Label>Category</Label>
-                        <div className="mt-2">
+                        <div className="mt-2 dark:text-black">
                             <CreatableSelect
                                 isClearable
                                 options={categoryOptions}

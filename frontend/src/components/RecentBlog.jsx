@@ -102,7 +102,7 @@ const RecentBlog = () => {
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="flex h-10 w-full rounded-md border bg-gray-200 dark:bg-gray-800 px-3 py-2 text-sm text-black"
+              className="flex h-10 w-full rounded-md border dark:text-white bg-gray-200 dark:bg-gray-800 px-3 py-2 text-sm text-black"
             />
             <Button type="submit" disabled={loading}>
               {loading ? "Subscribing..." : "Subscribe"}

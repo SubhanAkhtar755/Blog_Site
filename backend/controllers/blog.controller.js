@@ -31,32 +31,60 @@ export const createBlog = async (req,res) => {
         })
     }
 }
-
 export const updateBlog = async (req, res) => {
-    try {
-        const blogId = req.params.blogId
-        const { title, subtitle, description, category } = req.body;
-        const file = req.file;
+  try {
+    const blogId = req.params.blogId;
+    const { title, subtitle, description, category } = req.body;
+    const file = req.file;
 
-        let blog = await Blog.findById(blogId).populate("author");
-        if(!blog){
-            return res.status(404).json({
-                message:"Blog not found!"
-            })
-        }
-        let thumbnail;
-        if (file) {
-            const fileUri = getDataUri(file)
-            thumbnail = await cloudinary.uploader.upload(fileUri)
-        }
-
-        const updateData = {title, subtitle, description, category,author: req.id, thumbnail: thumbnail?.secure_url};
-        blog = await Blog.findByIdAndUpdate(blogId, updateData, {new:true});
-
-        res.status(200).json({ success: true, message: "Blog updated successfully", blog });
-    } catch (error) {
-        res.status(500).json({ success: false, message: "Error updating blog", error: error.message });
+    let blog = await Blog.findById(blogId);
+    if (!blog) {
+      return res.status(404).json({ message: "Blog not found!" });
     }
+
+    // 🔁 If new image uploaded, delete old and upload new
+    if (file) {
+      // 1. Delete old thumbnail if exists
+      if (blog.thumbnailPublicId) {
+        await cloudinary.uploader.destroy(blog.thumbnailPublicId);
+      }
+
+      // 2. Upload new thumbnail
+      const fileUri = getDataUri(file);
+      const cloudResponse = await cloudinary.uploader.upload(fileUri, {
+        folder: `blogThumbnails/${blogId}`,
+        public_id: "thumbnail",
+        overwrite: true,
+        resource_type: "image"
+      });
+
+      blog.thumbnail = cloudResponse.secure_url;
+      blog.thumbnailPublicId = cloudResponse.public_id;
+    }
+
+    // 📌 Update other fields
+    if (title) blog.title = title;
+    if (subtitle) blog.subtitle = subtitle;
+    if (description) blog.description = description;
+    if (category) blog.category = category;
+
+    blog.author = req.id;
+
+    await blog.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Blog updated successfully",
+      blog
+    });
+  } catch (error) {
+    console.error("Error updating blog:", error);
+    res.status(500).json({
+      success: false,
+      message: "Error updating blog",
+      error: error.message
+    });
+  }
 };
 
 export const getAllBlogs = async (_, res) => {
@@ -166,29 +194,36 @@ export const getOwnBlogs = async (req, res) => {
 
 // Delete a blog post
 export const deleteBlog = async (req, res) => {
-    try {
-        const blogId = req.params.id;
-        const authorId = req.id
-        const blog = await Blog.findById(blogId);
-        if (!blog) {
-            return res.status(404).json({ success: false, message: "Blog not found" });
-        }
-        if (blog.author.toString() !== authorId) {
-            return res.status(403).json({ success: false, message: 'Unauthorized to delete this blog' });
-        }
+  try {
+    const blogId = req.params.id;
+    const authorId = req.id;
 
-        // Delete blog
-        await Blog.findByIdAndDelete(blogId);
-
-        // Delete related comments
-        await Comment.deleteMany({ postId: blogId });
-
-
-        res.status(200).json({ success: true, message: "Blog deleted successfully" });
-    } catch (error) {
-        res.status(500).json({ success: false, message: "Error deleting blog", error: error.message });
+    const blog = await Blog.findById(blogId);
+    if (!blog) {
+      return res.status(404).json({ success: false, message: "Blog not found" });
     }
+
+    if (blog.author.toString() !== authorId) {
+      return res.status(403).json({ success: false, message: 'Unauthorized to delete this blog' });
+    }
+
+    // 🧹 Delete blog thumbnail from Cloudinary
+    if (blog.thumbnailPublicId) {
+      await cloudinary.uploader.destroy(blog.thumbnailPublicId);
+    }
+
+    // 🗑️ Delete blog from DB
+    await Blog.findByIdAndDelete(blogId);
+
+    // 🗑️ Delete related comments
+    await Comment.deleteMany({ postId: blogId });
+
+    res.status(200).json({ success: true, message: "Blog and thumbnail deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Error deleting blog", error: error.message });
+  }
 };
+
 
 export const likeBlog = async (req, res) => {
     try {
