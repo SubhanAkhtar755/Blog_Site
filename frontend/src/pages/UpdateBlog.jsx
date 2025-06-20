@@ -145,6 +145,7 @@ const UpdateBlog = () => {
                             ref={editor}
                             value={blogData.description}
                             onChange={newContent => setContent(newContent)}
+                            classname="dark:text-black"
                         />
                     </div>
                     <div>
