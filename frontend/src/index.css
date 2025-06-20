@@ -105,3 +105,14 @@
   display: block;
   width: 6px;
 }
+/* Optional: put in your global CSS */
+.scroll-on-hover::-webkit-scrollbar {
+  width: 6px;
+}
+.scroll-on-hover:hover::-webkit-scrollbar-thumb {
+  background-color: #999;
+  border-radius: 4px;
+}
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}

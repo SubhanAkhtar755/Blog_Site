@@ -51,6 +51,12 @@ const Profile = () => {
   const changeFileHandler = (e) => {
     setInput({ ...input, file: e.target.files?.[0] });
   };
+  const formatURL = (url) => {
+    if (!url) return "";
+    return url.startsWith("http://") || url.startsWith("https://")
+      ? url
+      : `https://${url}`;
+  };
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -59,10 +65,10 @@ const Profile = () => {
     formData.append("lastName", input.lastName);
     formData.append("bio", input.bio);
     formData.append("occupation", input.occupation);
-    formData.append("facebook", input.facebook);
-    formData.append("linkedin", input.linkedin);
-    formData.append("instagram", input.instagram);
-    formData.append("github", input.github);
+    formData.append("facebook", formatURL(input.facebook));
+    formData.append("linkedin", formatURL(input.linkedin));
+    formData.append("instagram", formatURL(input.instagram));
+    formData.append("github", formatURL(input.github));
     if (input?.file) {
       formData.append("file", input?.file);
     }
@@ -92,51 +98,62 @@ const Profile = () => {
   };
 
   return (
-    <div className="pt-20 md:ml-[320px] md:h-screen">
-      <div className="max-w-6xl mx-auto mt-8 ">
-        <Card className=" flex md:flex-row flex-col gap-10 p-6 md:p-10 dark:bg-gray-800 mx-4 md:mx-0">
+    <div className="pt-20 md:ml-[320px] min-h-screen">
+      <div className="max-w-6xl mx-auto mt-8">
+        <Card className="flex flex-col md:flex-row gap-10 p-4 md:p-10 dark:bg-gray-800 mx-2 md:mx-0">
           {/* image section */}
-          <div className="flex flex-col items-center justify-center md:w-[400px]">
-            <Avatar className="w-40 h-40 border-2">
+          <div className="flex flex-col items-center justify-center w-full md:w-[400px]">
+            <Avatar className="w-32 h-32 md:w-40 md:h-40 border-2">
               <AvatarImage src={user?.photoUrl || userLogo} />
             </Avatar>
             <h1 className="text-center font-semibold text-xl text-gray-700 dark:text-gray-300 my-3">
               {user?.occupation || "Mern Stack Developer"}
             </h1>
-            <div className="flex gap-4 items-center">
-              <Link>
-                <FaFacebook className="w-6 h-6 text-gray-800 dark:text-gray-300" />
-              </Link>
-              <Link to={`${user?.linkedin}`} target="_blank">
-                <FaLinkedin className="w-6 h-6 dark:text-gray-300 text-gray-800" />
-              </Link>
-              <Link to={`${user?.github}`} target="_blank">
-                <FaGithub className="w-6 h-6 dark:text-gray-300 text-gray-800" />
-              </Link>
-              <Link>
-                <FaInstagram className="w-6 h-6 text-gray-800 dark:text-gray-300" />
-              </Link>
-            </div>
+           <div className="flex gap-4 items-center justify-center">
+  {user?.facebook && (
+    <a href={formatURL(user?.facebook)} target="_blank" rel="noopener noreferrer">
+      <FaFacebook className="w-6 h-6 text-gray-800 dark:text-gray-300" />
+    </a>
+  )}
+  {user?.linkedin && (
+    <a href={formatURL(user?.linkedin)} target="_blank" rel="noopener noreferrer">
+      <FaLinkedin className="w-6 h-6 text-gray-800 dark:text-gray-300" />
+    </a>
+  )}
+  {user?.github && (
+    <a href={formatURL(user?.github)} target="_blank" rel="noopener noreferrer">
+      <FaGithub className="w-6 h-6 text-gray-800 dark:text-gray-300" />
+    </a>
+  )}
+  {user?.instagram && (
+    <a href={formatURL(user?.instagram)} target="_blank" rel="noopener noreferrer">
+      <FaInstagram className="w-6 h-6 text-gray-800 dark:text-gray-300" />
+    </a>
+  )}
+</div>
+
           </div>
+
           {/* info section */}
-          <div>
-            <h1 className="font-bold text-center md:text-start text-4xl mb-7">
+          <div className="w-full">
+            <h1 className="font-bold text-center md:text-start text-3xl md:text-4xl mb-5">
               Welcome {user?.firstName}!
             </h1>
-            <p className="">
-              <span className="font-semibold">Email : </span>
+            <p className="mb-3 text-center md:text-left">
+              <span className="font-semibold">Email: </span>
               {user?.email}
             </p>
+
             <div className="flex flex-col gap-2 items-start justify-start my-5">
               <Label className="">About Me</Label>
-              <p className="border dark:border-gray-600 p-6 w-96 min-h-[5rem] max-h-[20rem] overflow-y-auto rounded-lg scroll-on-hover">
+              <p className="border dark:border-gray-600 p-4 w-full md:w-96 min-h-[5rem] max-h-[20rem] overflow-y-auto rounded-lg scroll-on-hover">
                 {user?.bio || "Please update Bio"}
               </p>
             </div>
 
             <Dialog open={open} onOpenChange={setOpen}>
               <Button onClick={() => setOpen(true)}>Edit Profile</Button>
-              <DialogContent className="w-full max-w-sm mx-auto p-4 max-h-[90vh] overflow-y-auto scrollbar-hidden scrollbar-on-hover">
+              <DialogContent className="w-full max-w-md mx-auto p-4 max-h-[90vh] overflow-y-auto scrollbar-hidden scrollbar-on-hover">
                 <DialogHeader>
                   <DialogTitle className="text-center text-xl">
                     Edit Profile
@@ -151,7 +168,7 @@ const Profile = () => {
                   onSubmit={submitHandler}
                 >
                   {/* First + Last Name */}
-                  <div className="flex gap-2">
+                  <div className="flex flex-col md:flex-row gap-2">
                     <div className="w-full">
                       <Label>First Name</Label>
                       <Input
@@ -190,7 +207,7 @@ const Profile = () => {
                   </div>
 
                   {/* Socials */}
-                  <div className="flex gap-2">
+                  <div className="flex flex-col md:flex-row gap-2">
                     <div className="w-full">
                       <Label>Facebook</Label>
                       <Input
@@ -215,7 +232,7 @@ const Profile = () => {
                     </div>
                   </div>
 
-                  <div className="flex gap-2">
+                  <div className="flex flex-col md:flex-row gap-2">
                     <div className="w-full">
                       <Label>LinkedIn</Label>
                       <Input

@@ -89,7 +89,7 @@ const Navbar = () => {
                     <Link to={'/'}>
                         <div className='flex gap-2 items-center'>
                             <img src={Logo} alt="" className='w-7 h-7 md:w-10 md:h-10 dark:invert' />
-                            <h1 className='font-bold text-2xl md:text-4xl' title='Represents a complete space for all kinds of blogs.'>BlogSphere</h1>
+                            <h1 className='font-bold text-1xl md:text-4xl' title='Represents a complete space for all kinds of blogs.'>BlogSphere</h1>
                         </div>
                     </Link>
                     <div className='relative hidden md:block'>
