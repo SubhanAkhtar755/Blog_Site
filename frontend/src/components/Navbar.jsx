@@ -43,6 +43,7 @@ import { FaEdit, FaMoon, FaRegEdit, FaSun } from 'react-icons/fa'
 import { toggleTheme } from '@/redux/themeSlice'
 import { LiaCommentSolid } from 'react-icons/lia'
 import ResponsiveMenu from './ResponsiveMenu'
+import { FaLink } from 'react-icons/fa6'
 
 const Navbar = () => {
     const { user } = useSelector(store => store.auth)
@@ -148,6 +149,11 @@ const Navbar = () => {
                                             <DropdownMenuItem onClick={() => navigate('/dashboard/write-blog')}>
                                                 <FaRegEdit />
                                                 <span>Write Blog</span>
+                                                <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+                                            </DropdownMenuItem>
+                                            <DropdownMenuItem onClick={() => navigate('/dashboard/generate-link')}>
+                                                <FaLink />
+                                                <span>Links</span>
                                                 <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
                                             </DropdownMenuItem>
                                         </DropdownMenuGroup>
