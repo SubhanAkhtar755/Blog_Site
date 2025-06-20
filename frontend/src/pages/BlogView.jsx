@@ -142,13 +142,7 @@ const BlogView = () => {
                 <p className='' dangerouslySetInnerHTML={{ __html: selectedBlog.description }} />
 
                 <div className='mt-10'>
-                    {/* Tags */}
-                    <div className="flex flex-wrap gap-2 mb-8">
-                        <Badge variant="secondary">Next.js</Badge>
-                        <Badge variant="secondary">React</Badge>
-                        <Badge variant="secondary">Web Development</Badge>
-                        <Badge variant="secondary">JavaScript</Badge>
-                    </div>
+                 
 
                     {/* Engagement */}
                     <div className="flex items-center justify-between border-y dark:border-gray-800 border-gray-300 py-4 mb-8">
