@@ -49,9 +49,9 @@ The frontend is served from the backend folder in production (`dist`), making de
 
 > Replace these placeholders with actual screenshots from your project.
 
-- ![Homepage](./images/homepage.png)  
-- ![Dashboard](./images/dashboard.png)  
-- ![Blog Editor](./images/blog-editor.png)  
+- ![Homepage](https://github.com/SubhanAkhtar755/Blog_Site/blob/main/HomePage.png)  
+- ![Dashboard](https://github.com/SubhanAkhtar755/Blog_Site/blob/main/HomePage2.png)  
+- ![Blog Editor](https://github.com/SubhanAkhtar755/Blog_Site/blob/main/HomePage3.png)  
 
 ---
 
